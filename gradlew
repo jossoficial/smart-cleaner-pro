@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
-
-echo "Gradle wrapper placeholder"
+DIR="$(cd "$(dirname "$0")"; pwd)"
+exec "$DIR/gradle/wrapper/gradle-wrapper.jar" "$@"

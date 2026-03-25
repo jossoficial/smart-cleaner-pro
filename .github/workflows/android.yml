@@ -9,20 +9,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Set up JDK
+    - name: Install JDK
       uses: actions/setup-java@v3
       with:
-        distribution: 'temurin'
         java-version: '17'
+        distribution: 'temurin'
 
-    - name: Grant permission
-      run: chmod +x ./gradlew
+    - name: Install Gradle
+      run: |
+        wget https://services.gradle.org/distributions/gradle-7.6-bin.zip
+        unzip gradle-7.6-bin.zip
+        export PATH=$PATH:$PWD/gradle-7.6/bin
 
     - name: Build APK
-      run: ./gradlew assembleDebug
+      run: |
+        gradle assembleDebug
 
     - name: Upload APK
       uses: actions/upload-artifact@v3
